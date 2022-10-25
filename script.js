@@ -25,10 +25,27 @@ const quotes = [
     },
 ];
 
-function newQuote() {
-   let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-   document.querySelector('.phrase').innerHTML = '"' + randomQuote.quote + '"';
-   document.querySelector('.author').innerHTML = randomQuote.source;
-};
+const phrase = document.querySelector('.phrase');
+const author = document.querySelector('.author');
+const button = document.querySelector('button');
+const randomQuote = getRandomElement(quotes);
 
-newQuote()
+printQuote(randomQuote);
+
+function getRandomElement(array) {
+   return array[Math.floor(Math.random() * array.length)];
+}
+
+function printQuote(q) {
+    phrase.innerHTML = q.quote;
+    author.innerHTML = q.source;
+}
+
+function handleClick() {
+    const randomQuoteNext = getRandomElement(quotes);
+    printQuote(randomQuoteNext);
+}
+
+setInterval(handleClick,9000);
+
+button.addEventListener('click', handleClick);
